@@ -1,0 +1,36 @@
+<view class="page-container">
+  <view class="top-nav" style="padding-top: {{statusBarHeight}}px;">
+    <view class="nav-content">
+      <text class="nav-title">Profile</text>
+    </view>
+  </view>
+
+  <view class="content" style="margin-top: {{statusBarHeight + 44}}px;">
+    <view class="avatar-section">
+      <view class="avatar-placeholder">
+        <text class="avatar-text">TG</text>
+      </view>
+      <text class="username">Trend Explorer</text>
+      <text class="subtitle">Discover what's trending worldwide</text>
+    </view>
+
+    <view class="menu-list">
+      <view class="menu-item">
+        <text class="menu-label">Saved Trends</text>
+        <text class="menu-arrow">→</text>
+      </view>
+      <view class="menu-item">
+        <text class="menu-label">Notifications</text>
+        <text class="menu-arrow">→</text>
+      </view>
+      <view class="menu-item">
+        <text class="menu-label">Settings</text>
+        <text class="menu-arrow">→</text>
+      </view>
+      <view class="menu-item">
+        <text class="menu-label">About</text>
+        <text class="menu-arrow">→</text>
+      </view>
+    </view>
+  </view>
+</view>

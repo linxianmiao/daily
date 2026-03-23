@@ -1,0 +1,26 @@
+page {
+  background: #F5F5F7;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, 'PingFang SC', sans-serif;
+  color: #1A1A2E;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+view, text {
+  box-sizing: border-box;
+}
+
+button {
+  background: initial;
+  padding: 0;
+  margin: 0;
+  line-height: inherit;
+}
+
+button:focus {
+  outline: 0;
+}
+
+button::after {
+  border: none;
+}

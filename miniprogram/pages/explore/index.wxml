@@ -1,0 +1,71 @@
+<swiper
+  class="page"
+  vertical="{{true}}"
+  duration="{{300}}"
+  easing-function="easeInOutCubic"
+  bindchange="onSwiperChange"
+  current="{{currentIndex}}"
+  circular="{{true}}"
+  wx:if="{{!loading}}"
+>
+  <swiper-item wx:for="{{slots}}" wx:key="index">
+    <scroll-view class="card-scroll" scroll-y enhanced show-scrollbar="{{false}}" scroll-top="{{scrollTops[index]}}" wx:if="{{item}}">
+      <view class="content">
+
+        <!-- Trend Header -->
+        <view class="header">
+          <text class="keyword">{{item.keyword}}</text>
+        </view>
+
+        <!-- Definition Cards -->
+        <view class="feed">
+          <view
+            class="glass-card"
+            wx:for="{{item.definitions}}"
+            wx:for-item="def"
+            wx:for-index="defIdx"
+            wx:key="defIdx"
+          >
+            <view class="card-header">
+              <view class="card-icon" style="background: {{defIdx % 2 === 0 ? 'rgba(89,91,140,0.1)' : 'rgba(116,84,121,0.1)'}};">
+                <text class="card-icon-text" style="color: {{defIdx % 2 === 0 ? '#595b8c' : '#745479'}};">{{defIdx + 1}}</text>
+              </view>
+              <text class="card-label">Definition {{defIdx + 1}}</text>
+            </view>
+
+            <view class="section">
+              <text class="section-title" style="color: {{defIdx % 2 === 0 ? '#595b8c' : '#745479'}};">MEANING</text>
+              <text class="section-body">{{def.definition}}</text>
+            </view>
+
+            <view class="divider" wx:if="{{def.example}}"></view>
+
+            <view class="section" wx:if="{{def.example}}">
+              <text class="section-title section-title-secondary">EXAMPLE</text>
+              <view class="example-block" style="border-color: {{defIdx % 2 === 0 ? '#e2e0f9' : '#f5cdf9'}};">
+                <text class="example-text">"{{def.example}}"</text>
+              </view>
+            </view>
+
+            <view class="card-actions" wx:if="{{def.thumbsUpText}}">
+              <view class="action-btn">
+                <text class="action-icon">👍</text>
+                <text class="action-count">{{def.thumbsUpText}}</text>
+              </view>
+            </view>
+          </view>
+        </view>
+
+        <view class="bottom-hint">
+          <text class="bottom-hint-text">↑ 上滑查看下一个词条</text>
+        </view>
+        <view class="bottom-spacer"></view>
+
+      </view>
+    </scroll-view>
+  </swiper-item>
+</swiper>
+
+<view class="loading" wx:if="{{loading}}">
+  <text class="loading-text">Loading...</text>
+</view>
