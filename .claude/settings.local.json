@@ -7,11 +7,7 @@
       "Bash(claude mcp:*)",
       "mcp__figma-remote-mcp__get_design_context",
       "Bash(node scraper.js)",
-      "Bash(npm install:*)",
-      "Bash(*)",
-      "Bash(curl -s --max-time 10 \"https://api.urbandictionary.com/v0/define?term=OC\")",
-      "Bash(curl -v --max-time 10 \"https://api.urbandictionary.com/v0/define?term=test\")",
-      "Bash(https_proxy=http://127.0.0.1:8080 curl -s --max-time 10 \"https://api.urbandictionary.com/v0/define?term=OC\")"
+      "Bash(npm install:*)"
     ]
   }
 }
