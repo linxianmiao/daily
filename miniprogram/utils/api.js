@@ -27,7 +27,9 @@ function transformItem(kw) {
     definitions: (kw.definitions || []).map((d) => ({
       ...d,
       thumbsUpText: formatCount(d.thumbsUp),
+      showZh: false,
     })),
+    pinyin: kw.pinyin || '',
     category: kw.category || 'General',
     source: kw.source || '',
   };

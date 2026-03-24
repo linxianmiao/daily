@@ -15,12 +15,14 @@
         <!-- Trend Header -->
         <view class="header">
           <text class="keyword">{{item.keyword}}</text>
+          <text class="pinyin" wx:if="{{item.pinyin}}">{{item.pinyin}}</text>
         </view>
 
         <!-- Definition Cards -->
         <view class="feed">
           <view
             class="glass-card"
+            style="animation-delay: {{defIdx * 0.15}}s;"
             wx:for="{{item.definitions}}"
             wx:for-item="def"
             wx:for-index="defIdx"
@@ -35,22 +37,29 @@
 
             <view class="section">
               <text class="section-title" style="color: {{defIdx % 2 === 0 ? '#595b8c' : '#745479'}};">MEANING</text>
-              <text class="section-body">{{def.definition}}</text>
+              <text class="section-body" wx:if="{{!def.showZh}}">{{def.definition_us || def.definition}}</text>
+              <text class="section-body" wx:if="{{def.showZh}}">{{def.definition_zh || def.definition}}</text>
             </view>
 
-            <view class="divider" wx:if="{{def.example}}"></view>
+            <view class="divider" wx:if="{{def.example_us || def.example_zh || def.example}}"></view>
 
-            <view class="section" wx:if="{{def.example}}">
+            <view class="section" wx:if="{{def.example_us || def.example_zh || def.example}}">
               <text class="section-title section-title-secondary">EXAMPLE</text>
               <view class="example-block" style="border-color: {{defIdx % 2 === 0 ? '#e2e0f9' : '#f5cdf9'}};">
-                <text class="example-text">"{{def.example}}"</text>
+                <text class="example-text" wx:if="{{!def.showZh}}">"{{def.example_us || def.example}}"</text>
+                <text class="example-text" wx:if="{{def.showZh}}">"{{def.example_zh || def.example}}"</text>
               </view>
             </view>
 
-            <view class="card-actions" wx:if="{{def.thumbsUpText}}">
-              <view class="action-btn">
-                <text class="action-icon">👍</text>
-                <text class="action-count">{{def.thumbsUpText}}</text>
+            <view class="card-footer">
+              <view class="translate-btn" wx:if="{{def.definition_zh && def.definition_us}}" bindtap="toggleLang" data-slot-idx="{{index}}" data-def-idx="{{defIdx}}">
+                <text class="translate-icon">{{def.showZh ? '中' : 'EN'}}</text>
+              </view>
+              <view class="card-actions" wx:if="{{def.thumbsUpText}}">
+                <view class="action-btn">
+                  <text class="action-icon">👍</text>
+                  <text class="action-count">{{def.thumbsUpText}}</text>
+                </view>
               </view>
             </view>
           </view>
@@ -67,5 +76,35 @@
 </swiper>
 
 <view class="loading" wx:if="{{loading}}">
-  <text class="loading-text">Loading...</text>
+  <!-- 骨架屏：关键词占位 -->
+  <view class="skeleton-bar skeleton-keyword"></view>
+  <view class="skeleton-bar skeleton-pinyin"></view>
+
+  <!-- 骨架屏：第一张卡片 -->
+  <view class="skeleton-card">
+    <view class="skeleton-card-header">
+      <view class="skeleton-bar skeleton-icon"></view>
+      <view class="skeleton-bar skeleton-label"></view>
+    </view>
+    <view class="skeleton-bar skeleton-title"></view>
+    <view class="skeleton-bar skeleton-line skeleton-line-full"></view>
+    <view class="skeleton-bar skeleton-line skeleton-line-3q"></view>
+    <view class="skeleton-divider"></view>
+    <view class="skeleton-bar skeleton-title"></view>
+    <view class="skeleton-example">
+      <view class="skeleton-bar skeleton-line skeleton-line-full"></view>
+      <view class="skeleton-bar skeleton-line skeleton-line-half"></view>
+    </view>
+  </view>
+
+  <!-- 骨架屏：第二张卡片（带延迟） -->
+  <view class="skeleton-card" style="animation-delay: 0.3s;">
+    <view class="skeleton-card-header">
+      <view class="skeleton-bar skeleton-icon"></view>
+      <view class="skeleton-bar skeleton-label"></view>
+    </view>
+    <view class="skeleton-bar skeleton-title"></view>
+    <view class="skeleton-bar skeleton-line skeleton-line-full"></view>
+    <view class="skeleton-bar skeleton-line skeleton-line-half"></view>
+  </view>
 </view>

@@ -61,6 +61,13 @@ Page({
     return null;
   },
 
+  toggleLang(e) {
+    const { slotIdx, defIdx } = e.currentTarget.dataset;
+    const key = `slots[${slotIdx}].definitions[${defIdx}].showZh`;
+    const current = this.data.slots[slotIdx].definitions[defIdx].showZh;
+    this.setData({ [key]: !current });
+  },
+
   async onSwiperChange(e) {
     const newIdx = e.detail.current;
     const oldIdx = this.data.currentIndex;
