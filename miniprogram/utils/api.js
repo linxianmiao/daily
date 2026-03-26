@@ -36,9 +36,9 @@ function transformItem(kw) {
 }
 
 module.exports = {
-  // 随机获取1条，排除已看过的
-  getRandomItem(excludeIds = []) {
-    return callCloud('getRandomItem', { excludeIds });
+  // 随机获取1条，排除已看过的，按 category 筛选
+  getRandomItem(excludeIds = [], category = '') {
+    return callCloud('getRandomItem', { excludeIds, category });
   },
 
   transformItem,

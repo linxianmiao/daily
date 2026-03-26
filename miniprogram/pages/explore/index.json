@@ -1,3 +1,7 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "lang-switcher": "../../components/lang-switcher/index",
+    "definition-card": "../../components/definition-card/index",
+    "share-btn": "../../components/share-btn/index"
+  }
 }

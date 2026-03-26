@@ -6,6 +6,7 @@ Page({
     currentIndex: 1,
     scrollTops: [0, 0, 0],
     loading: true,
+    category: 'en',
   },
 
   // 已看过的 _id，避免重复
@@ -21,12 +22,13 @@ Page({
     this.initLoad();
   },
 
-  async initLoad() {
+  async initLoad(category) {
+    const cat = category || this.data.category;
     this.setData({ loading: true });
     try {
       // 加载当前 + 下一个
-      const cur = await this.fetchOne();
-      const next = await this.fetchOne();
+      const cur = await this.fetchOne(cat);
+      const next = await this.fetchOne(cat);
       this.setData({
         slots: [null, cur, next],
         currentIndex: 1,
@@ -38,9 +40,18 @@ Page({
     }
   },
 
-  async fetchOne() {
+  async switchCategory(e) {
+    const cat = e.detail.category;
+    if (cat === this.data.category) return;
+    this.seenIds = [];
+    this.setData({ category: cat });
+    await this.initLoad(cat);
+  },
+
+  async fetchOne(category) {
+    const cat = category || this.data.category;
     try {
-      const res = await api.getRandomItem(this.seenIds);
+      const res = await api.getRandomItem(this.seenIds, cat);
       if (res.item) {
         const card = api.transformItem(res.item);
         this.seenIds.push(card._id);
@@ -49,7 +60,7 @@ Page({
       // 所有词都看过了，重置
       console.log('[explore] 所有词条已看完，重置');
       this.seenIds = [];
-      const retry = await api.getRandomItem([]);
+      const retry = await api.getRandomItem([], cat);
       if (retry.item) {
         const card = api.transformItem(retry.item);
         this.seenIds.push(card._id);
@@ -61,8 +72,20 @@ Page({
     return null;
   },
 
-  toggleLang(e) {
-    const { slotIdx, defIdx } = e.currentTarget.dataset;
+  onShareAppMessage(e) {
+    const { slotIdx, defIdx } = e.target?.dataset || {};
+    const slot = this.data.slots[slotIdx];
+    const keyword = slot?.keyword || '潮流词条';
+    return {
+      title: `「${keyword}」是什么意思？来看看！`,
+      path: '/pages/explore/index',
+    };
+  },
+
+  onCardToggleLang(e) {
+    const { defIdx } = e.detail;
+    // 找到触发事件的 swiper-item 的 slot index
+    const slotIdx = e.currentTarget.dataset.slotIdx;
     const key = `slots[${slotIdx}].definitions[${defIdx}].showZh`;
     const current = this.data.slots[slotIdx].definitions[defIdx].showZh;
     this.setData({ [key]: !current });

@@ -10,12 +10,16 @@ const COLLECTION = "trending_items";
 
 // 随机获取1条，排除已看过的 _id 列表
 const getRandomItem = async (event) => {
-  const { excludeIds = [] } = event;
+  const { excludeIds = [], category = '' } = event;
+  console.log('[getRandomItem] category:', category, 'excludeIds count:', excludeIds.length);
 
   // 构建查询条件
   let where = {};
   if (excludeIds.length > 0) {
     where._id = _.nin(excludeIds);
+  }
+  if (category) {
+    where.category = category;
   }
 
   // 先获取符合条件的总数

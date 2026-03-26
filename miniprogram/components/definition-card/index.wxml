@@ -1,0 +1,25 @@
+<view class="glass-card" style="animation-delay: {{defIdx * 0.15}}s;">
+  <!-- Translate Button -->
+  <view class="translate-btn card-top-right" wx:if="{{def.definition_zh && def.definition_us}}" bindtap="onToggleLang">
+    <text class="translate-icon">{{def.showZh ? 'EN' : '中'}}</text>
+  </view>
+
+  <!-- Meaning Section -->
+  <view class="section">
+    <text class="section-title" style="color: {{defIdx % 2 === 0 ? '#595b8c' : '#745479'}};">MEANING</text>
+    <text class="section-body" wx:if="{{!def.showZh}}">{{def.definition_us || def.definition}}</text>
+    <text class="section-body" wx:if="{{def.showZh}}">{{def.definition_zh || def.definition}}</text>
+  </view>
+
+  <!-- Divider -->
+  <view class="divider" wx:if="{{def.example_us || def.example_zh || def.example}}"></view>
+
+  <!-- Example Section -->
+  <view class="section" wx:if="{{def.example_us || def.example_zh || def.example}}">
+    <text class="section-title section-title-secondary">EXAMPLE</text>
+    <view class="example-block" style="border-color: {{defIdx % 2 === 0 ? '#e2e0f9' : '#f5cdf9'}};">
+      <text class="example-text" wx:if="{{!def.showZh}}">"{{def.example_us || def.example}}"</text>
+      <text class="example-text" wx:if="{{def.showZh}}">"{{def.example_zh || def.example}}"</text>
+    </view>
+  </view>
+</view>

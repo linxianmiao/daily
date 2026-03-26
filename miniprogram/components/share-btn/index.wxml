@@ -1,0 +1,9 @@
+<button class="share-btn" open-type="share">
+  <view class="share-icon-wrapper">
+    <view class="share-dot share-dot-tl"></view>
+    <view class="share-line share-line-tl"></view>
+    <view class="share-dot share-dot-tr"></view>
+    <view class="share-line share-line-tr"></view>
+    <view class="share-dot share-dot-center"></view>
+  </view>
+</button>

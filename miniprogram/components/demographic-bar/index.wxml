@@ -1,9 +1,0 @@
-<view class="demo-row">
-  <view class="demo-header">
-    <text class="demo-label">{{label}}</text>
-    <text class="demo-pct">{{pct}}%</text>
-  </view>
-  <view class="demo-track">
-    <view class="demo-fill" style="width: {{pct}}%; background: {{color}};"></view>
-  </view>
-</view>

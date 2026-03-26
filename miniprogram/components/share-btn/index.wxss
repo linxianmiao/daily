@@ -1,0 +1,74 @@
+.share-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72rpx !important;
+  height: 72rpx !important;
+  min-height: 0 !important;
+  border-radius: 50% !important;
+  background: linear-gradient(145deg, rgba(240, 238, 255, 0.7), rgba(215, 212, 245, 0.4));
+  padding: 0 !important;
+  margin: 0;
+  border: none;
+  line-height: 1;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  box-shadow:
+    6rpx 6rpx 16rpx rgba(89, 91, 140, 0.18),
+    -4rpx -4rpx 12rpx rgba(255, 255, 255, 0.7),
+    inset 1rpx 1rpx 4rpx rgba(255, 255, 255, 0.6);
+}
+
+.share-btn::after {
+  display: none;
+}
+
+.share-icon-wrapper {
+  position: relative;
+  width: 32rpx;
+  height: 32rpx;
+}
+
+.share-dot {
+  position: absolute;
+  width: 10rpx;
+  height: 10rpx;
+  border-radius: 50%;
+  background: #595b8c;
+}
+
+.share-dot-center {
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.share-dot-tr {
+  right: 0;
+  top: 0;
+}
+
+.share-dot-tl {
+  right: 0;
+  bottom: 0;
+}
+
+.share-line {
+  position: absolute;
+  width: 20rpx;
+  height: 3rpx;
+  background: #595b8c;
+  left: 4rpx;
+}
+
+.share-line-tl {
+  top: 50%;
+  transform-origin: left center;
+  transform: rotate(30deg);
+}
+
+.share-line-tr {
+  top: 50%;
+  transform-origin: left center;
+  transform: rotate(-30deg);
+}

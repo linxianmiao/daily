@@ -1,0 +1,4 @@
+<view class="lang-switcher-inner">
+  <view class="lang-option {{category === 'en' ? 'lang-active' : ''}}" bindtap="onSwitch" data-cat="en">学英文</view>
+  <view class="lang-option {{category === 'zh' ? 'lang-active' : ''}}" bindtap="onSwitch" data-cat="zh">Learn Chinese</view>
+</view>
